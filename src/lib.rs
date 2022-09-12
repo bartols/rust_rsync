@@ -1,4 +1,5 @@
 pub mod stream;
+pub mod signature;
 
 #[cfg(test)]
 mod tests {
