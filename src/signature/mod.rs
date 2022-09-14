@@ -1,2 +1,3 @@
-mod signature;
-mod weak;
+pub mod signature;
+pub mod weak;
+pub mod strong;
