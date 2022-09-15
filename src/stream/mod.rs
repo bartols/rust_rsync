@@ -1,2 +1,2 @@
 pub mod stream_traits;
-mod string_stream;
+pub mod string_stream;

@@ -7,13 +7,13 @@ pub struct WeakChecksum {
     sum2: i32
 }
 
-const base:i32 = 65521;
+const BASE:i32 = 65521;
 
 pub fn calculate_weak(data:&Vec<u8>) -> WeakChecksum {
     let mut chk = WeakChecksum{ checksum:0, size:data.len(), sum1:1, sum2:0 };
     for ch in data {
-        chk.sum1 = (chk.sum1 + (*ch as i32)) % base;
-        chk.sum2 = (chk.sum2 + chk.sum1) % base;
+        chk.sum1 = (chk.sum1 + (*ch as i32)) % BASE;
+        chk.sum2 = (chk.sum2 + chk.sum1) % BASE;
     }
     chk.checksum = (chk.sum2 << 16) | chk.sum1;
     chk
@@ -23,15 +23,15 @@ pub fn roll_checksum(checksum: &WeakChecksum, remove:u8, add:u8) -> WeakChecksum
     let mut chk:WeakChecksum = *checksum;
     
     chk.sum1 += (add as i32) - (remove as i32);
-    if chk.sum1 >= base {
-        chk.sum1 -= base;
+    if chk.sum1 >= BASE {
+        chk.sum1 -= BASE;
     } else if chk.sum1 < 0 {
-        chk.sum1 += base;
+        chk.sum1 += BASE;
     }
 
-    chk.sum2 = ((chk.sum2 - (chk.size as i32) * (remove as i32) + chk.sum1 - 1) as i32) % base;
+    chk.sum2 = ((chk.sum2 - (chk.size as i32) * (remove as i32) + chk.sum1 - 1) as i32) % BASE;
     if chk.sum2 < 0 {
-        chk.sum2 += base;
+        chk.sum2 += BASE;
     }
     chk.checksum = (chk.sum2 << 16) | chk.sum1;
     chk
@@ -49,7 +49,7 @@ mod tests {
     }
 
     #[test]
-    fn testRoll() {
+    fn test_roll() {
         let data1: Vec<u8> = "abc".as_bytes().to_vec();
         let chk1 = calculate_weak(&data1);
 

@@ -2,12 +2,12 @@
 // String stream
 //
 
-use std::{convert::TryInto, iter::FromIterator};
+use std::{convert::TryInto};
 
 use crate::stream::stream_traits::*;
 
 // an input string stream
-struct StringIStream {
+pub struct StringIStream {
    data: Vec<u8>, 
    pos: usize,
 }
@@ -38,14 +38,24 @@ impl IStream for StringIStream {
         }
 
         // restart reading from head
-        fn restart(mut self) {
+        fn restart(&mut self) {
             self.pos = 0;
         }
 }
 
 // an output string stream
-struct StringOStream {
+pub struct StringOStream {
     data: String,
+}
+
+impl StringOStream {
+    pub fn new() -> StringOStream {
+        StringOStream{ data: String::new() }
+    }
+
+    pub fn result(&self) -> &String {
+        &self.data
+    }
 }
 
 impl OStream for StringOStream {

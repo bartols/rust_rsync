@@ -23,5 +23,17 @@
             "args": [],
             "cwd": "${workspaceFolder}"
         }
+        // {
+        //     "type": "lldb",
+        //     "request": "launch",
+        //     "name": "Debug integration tests in library 'rsync'",
+        //     "cargo": {
+        //         "args": [
+        //             "test",
+        //             "--no-run",
+        //             "integration_test"
+        //         ]
+        //     }
+        // }
     ]
-}
+} 

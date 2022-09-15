@@ -1,7 +1,6 @@
 // strong checksum
 use sha1::{Sha1, Digest};
-use std::{fmt::Write, num::ParseIntError};
-use std::str;
+use std::{fmt::Write};
 
 pub fn calculate_strong(data:&Vec<u8>) -> String {
     let mut hasher = Sha1::new();

@@ -11,7 +11,7 @@ pub trait IStream {
     fn read(&mut self, size: u32) -> Result<Vec<u8>,Error>;
 
     // restart reading from head
-    fn restart(self);
+    fn restart(&mut self);
 }
 
 // an output stream trait
